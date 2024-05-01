@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Заказы клиента {{client.name}}{% endblock %}</title>
+</head>
+
+<body>
+    {% block content %}
+    <h1> Заказы клиента {{client.name}}: </h1>
+    {% if not orders %}
+         <h2>🔴 Нет заказов </h2>
+    {% else %}
+        {% for order in orders %}
+        <h3> 🟢 Заказ № {{ order.pk }}</h3>
+            <ul>Товары заказа:
+            {% for key, value in products.items %}
+            {% if key == order.pk %}
+            {% for elem in value %}
+            <li>{{ elem }}</li>
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    {% endif %}
+    {% endblock %}
+</body>

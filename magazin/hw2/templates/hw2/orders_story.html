@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}История заказов{{client.name}}{% endblock %}
+
+    {% block content %}
+    <h1>История заказов клиента {{ customer.name }}</h1>
+    <p>За {{ days }} дней заказаны товары:</p>
+    {% if not prods_dict %}
+         <h2>🔴 Нет заказов </h2>
+    {% else %}
+    <p>
+    <table>
+        <tr>
+            <th>Номер заказа</th>
+            <th>Дата заказа</th>
+            <th>Наименование товара</th>
+        </tr>
+        {% for key, value in prods_dict.items %}
+        {% for elem in value %}
+        <tr>
+            <td>{{ key.pk }}</td>
+            <td>{{ key.created.date }}</td>
+            <td>{{ elem.name }}</td>
+        </tr>
+        {% endfor %}
+        {% endfor %}
+    </table>
+    </p>
+ {% endif %}
+
+    {% endblock %}
