@@ -20,6 +20,7 @@ class Products(models.Model):
     quantity = models.PositiveIntegerField(default=1)
     added = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    image = models.ImageField(upload_to='product_images', default='default_image.jpg')
 
     def cost(self):
         prod_cost = self.price * self.quantity
